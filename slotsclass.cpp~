@@ -1,0 +1,164 @@
+#include <iostream>
+#include <fstream>
+#include <ctime>
+#include <cstdlib>
+#include "functions.h" // my string library
+#include "class.h" // class header
+
+using namespace std;
+
+void populate(symbol *v1, symbol *v2);
+
+void print(symbol *v1);
+
+void pickandprint(symbol *v1);
+
+int main()
+{
+
+	//arrays containing symbols
+	symbol * load = new symbol [6]; 
+	symbol * s1 = new symbol [10];
+
+	srand (time(NULL));//random operator
+
+	char *fileptr = new char[20];
+	cout << "Enter input file:" << endl;
+	cin >> fileptr;//Read in the symbols from data file
+
+	char* temp = new char [20];
+
+	int t;
+
+	ifstream fin;
+	fin.open(fileptr);
+	for (int i = 0; i < 6; i++)
+	{
+		fin >> temp;
+		fin >> t;
+	
+		(*load).setname(temp);
+		(*load).setbonusvalue(t);
+
+		load++;
+
+	}
+	fin.close();
+
+	for (int i = 0; i < 6; i++)
+	{
+		load--;
+	}
+
+	delete [] fileptr;
+	fileptr = NULL;
+	
+	char input; //user input
+	bool running = true; //way of exiting program
+	
+	do
+	{
+
+	//switch statement variables
+		cout << "................................................." << endl;
+		cout << ": Press 1 to populate slot machine              :" << endl;
+		cout << ": Press 2 to print the slot machine             :" << endl;
+		cout << ": Press 3 to chose reel and stop number to view :" << endl;
+		cout << ": Press q to quit the program                   :" << endl;
+		cout << ":...............................................:" << endl;
+		//get input
+		cin >> input;
+
+		//menu input 
+		switch (input)
+		{
+		
+			case '1':{
+				populate (s1, load);
+				cout << "Done" << endl;
+				break;}
+			case '2':{
+				print(s1);
+				break;}
+			case '3':{
+				pickandprint(s1);
+				break;}
+			case 'q':{ 
+				running = false;
+				break;}
+			case 'Q':{
+				running = false;
+				break;}
+
+		}
+
+	}while(running);
+	
+	delete [] s1;
+	s1 = NULL;
+	delete [] load;
+	load = NULL;
+	delete [] temp;
+	temp = NULL;
+
+	return 0;
+}
+
+void populate (symbol *v1, symbol *v2)
+{
+
+	symbol *tmp = v2;
+
+	for (int i = 0; i < 10; i++)
+	{
+		int randval = rand()%6;
+		
+		for( int j = 0; j < randval; j++)
+		{
+			tmp++;
+		}
+
+		(*v1).setbonusvalue((*tmp).getbonusvalue());	
+
+		(*v1).setname((*tmp).getname());
+
+		v1++;
+		tmp = v2;
+	}
+}
+
+void print(symbol *v1) // print function
+{ 
+	for (int i = 0; i > 10; i++)
+	{
+		cout << (*v1).getname() << endl;
+		v1++;
+	}
+}
+
+void pickandprint(symbol *v1)
+{
+
+	int stop;
+
+	//set a stop pointer
+	symbol *stoppoint = v1;
+
+	cout << "Pick stop number (0-9):";
+	cin >> stop;
+
+	while (stop > 9)
+	{
+		cout << "Try again: ";
+		cin >> stop;
+	}
+	
+	for (int i = 0; i < stop; i++)
+	{
+		stoppoint++;
+	}
+	
+	(*stoppoint).printclass();
+
+	stoppoint = v1;
+}

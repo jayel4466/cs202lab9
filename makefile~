@@ -1,0 +1,24 @@
+
+CC=g++
+
+
+CFLAGS=-c -Wall
+
+
+all: slotsclass
+
+
+slotsclass: slotsclass.cpp functions.o class.o
+	$(CC) slotsclass.cpp functions.o class.o -o slotsclass
+
+
+functions.o: functions.cpp
+	$(CC) $(CFLAGS) functions.cpp
+
+
+class.o: class.cpp
+	$(CC) $(CFLAGS) class.cpp
+
+
+clean:
+	rm -rf *.o slots

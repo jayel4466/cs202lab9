@@ -1,0 +1,29 @@
+class symbol
+{
+	public:
+	//constructor
+	symbol();
+
+	//setter funcitons
+	void setbonusvalue(int b);
+	void setifbonusvalue(bool i);
+	void setname(char* pass);
+
+	//getter functions
+	int getbonusvalue();
+	bool getifbonusvalue();
+	char *getname();
+	
+	//print function
+	void printclass();
+
+	//destructer
+	~symbol();
+
+	private:
+	//private data
+	char* name;
+	int bonusvalue;
+	bool ifbonusvalue;
+
+};

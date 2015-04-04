@@ -1,0 +1,71 @@
+#include <iostream>
+#include <cstdlib>
+#include "functions.h"
+
+int strlength(char *str1)
+{
+	int x = 0;
+	while((*str1) != '\0')
+	{
+		str1++;
+		x++;
+	}
+	
+	return x;
+}
+
+
+bool strcmp(char *str1, char *str2)
+{
+	
+	bool equals = true;
+	
+	while((*str1) != '\0' && (*str2) != '\0' && equals)
+	{
+		if ((*str1) != (*str2))
+		{
+			equals = false;
+		}
+		str1++;
+		str2++;
+	}
+
+	if ((*str1) != (*str2))
+	{
+		equals = false;
+	}
+
+	return equals;
+
+}
+
+void strcpy(char *dest, char *source)
+{ 
+ 	
+	int i=0;
+	while((*source) != '\0')
+	{
+		(*dest) = (*source);
+		dest++;
+		source++;
+	}
+	(*dest) = '\0';
+
+
+}
+
+void strcat(char *dest, char *src)
+{
+	while((*src) != '\0')
+	{
+		src++;
+	}
+		while((*dest) != '\0')
+		{
+			(*dest)=(*src);
+			src++;
+			dest++;
+		}
+	(*dest) = '\0';
+}
+

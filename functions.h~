@@ -1,0 +1,11 @@
+#ifndef FUNCTIONS_H
+#define FUNCTIONS_H
+
+using namespace std;
+
+int strlength(char *str1);
+bool strcmp(char *str1, char *str2);
+void strcpy(char *dest, char *source);
+void strcat(char *dest, char *src);
+
+#endif

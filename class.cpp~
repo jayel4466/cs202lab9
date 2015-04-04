@@ -1,0 +1,94 @@
+#include "class.h"
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#ifndef functions_h
+#define functions_h
+
+int strlength(char *str1);
+bool strcmp(char *str1, char *str2);
+void strcpy(char *dest, char *source);
+void strcat(char *dest, char *src);
+
+#endif
+
+using namespace std;
+
+//constructor
+symbol::symbol()
+{
+	name = NULL;
+	bonusvalue = 0;
+	ifbonusvalue = 0;
+	
+}
+
+//setters
+void symbol::setbonusvalue(int b)
+{	
+	if ( b > 0 )
+	{
+		bonusvalue = b;
+	}
+	else bonusvalue = 0;
+
+	if ( b > 0 )
+	{
+		ifbonusvalue = 1;
+	}
+	else ifbonusvalue = 0;
+}
+
+void symbol::setifbonusvalue(bool i)
+{
+	ifbonusvalue = i;
+}
+
+void symbol::setname(char * pass)
+{
+	int value;
+
+	value = strlength(pass);
+
+	name = new char [value+1];
+	
+	strcpy(name, pass);
+}
+
+//getters
+int symbol::getbonusvalue()
+{
+	return bonusvalue;
+}
+
+bool symbol::getifbonusvalue()
+{
+	return ifbonusvalue;
+}
+
+char* symbol::getname()
+{
+	return name;
+}
+//deconstructor
+symbol::~symbol()
+{
+	if (name == NULL)
+	{
+		delete [] name;
+		name = NULL;
+	}
+	
+}
+
+//print
+void symbol::printclass()
+{
+	cout << name << endl;
+	
+	if(ifbonusvalue == true)
+	{
+		cout << "Bonus: " << bonusvalue << endl;
+	}
+	else cout << "No bonus" << endl;
+}
